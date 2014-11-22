@@ -1,0 +1,5 @@
+<ul>
+<% _.each(campaigns, function (campaign) { %>
+    <li><a href='<%= "/advertiser/" + campaign.advertiser + "/" + campaign.id %>'><%= campaign.name %></a></li>
+    <% }) %>
+</ul>
