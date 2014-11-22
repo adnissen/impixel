@@ -8,6 +8,9 @@
 module.exports = {
   login: function(req, res){
     Advertiser.findOne(req.param('advertiser')).exec(function findOneCB(e, advertiser){
+      if (!advertiser){
+        return res.forbidden();
+      }
       if (req.param('password') == advertiser.password){
         req.session.advertiserToken = req.param('password');
         req.session.advertiserId = req.param('advertiser');
@@ -49,6 +52,11 @@ module.exports = {
         campaigns: data
       });
     });
+  },
+  create: function(req, res){
+    Advertiser.create({name: req.param('name'), password: req.param('password')}).exec(function createCB(data, created){
+      return res.ok(); 
+    });;
   }
 };
 

@@ -48,6 +48,8 @@ module.exports.routes = {
   'get /track/:campaign/pixel.png': 'CampaignController.track',
   'get /track/:campaign/': 'CampaignController.show',
 
+  'post /advertiser/create': 'Advertiser.create',
+  'get /advertiser/create': {view: 'advertiser/create'},
   'get /advertiser/:advertiser/login': 'Advertiser.login',
   'get /advertiser/:advertiser/dashboard': 'Advertiser.show',
   'get /advertiser/:advertiser/:campaign': 'Advertiser.showCampaign'
