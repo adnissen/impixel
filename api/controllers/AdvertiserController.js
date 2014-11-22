@@ -54,8 +54,9 @@ module.exports = {
     });
   },
   create: function(req, res){
-    Advertiser.create({name: req.param('name'), password: req.param('password')}).exec(function createCB(data, created){
-      return res.ok(); 
+    Advertiser.create({name: req.param('name'), password: req.param('password')}).exec(function createCB(err, created){
+      if (err) console.log(err);
+      return res.redirect('/advertiser/' + created.id + '/login');
     });;
   }
 };
