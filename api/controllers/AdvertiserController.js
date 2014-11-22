@@ -57,7 +57,13 @@ module.exports = {
     Advertiser.create({name: req.param('name'), password: req.param('password')}).exec(function createCB(err, created){
       if (err) console.log(err);
       return res.redirect('/advertiser/' + created.id + '/login');
-    });;
+    });
+  },
+  createCampaign: function(req, res){
+    Campaign.create({name: req.param('name'), advertiser: req.param('advertiser')}).exec(function createCB(err, created){
+      if (err) console.log(err);
+      return res.redirect('/advertiser/' + created.advertiser + '/' + created.id);
+    });
   }
 };
 

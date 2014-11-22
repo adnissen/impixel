@@ -54,5 +54,6 @@ module.exports.policies = {
     show: 'advertiserAuth',
     create: true,
     login: true,
+    createCampaign: true
   }
 };

@@ -50,6 +50,8 @@ module.exports.routes = {
 
   'post /advertiser/create': 'Advertiser.create',
   'get /advertiser/create': {view: 'advertiser/create'},
+  'get /advertiser/campaigns/create': {view: 'advertiser/create_campaign'},
+  'post /advertiser/campaigns/create': 'Advertiser.createCampaign',
   'get /advertiser/:advertiser/login': 'Advertiser.login',
   'get /advertiser/:advertiser/dashboard': 'Advertiser.show',
   'get /advertiser/:advertiser/:campaign': 'Advertiser.showCampaign'
