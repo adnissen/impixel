@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing campaigns
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-
+fs = require('fs');
 module.exports = {
   track: function(req, res){
     var campaignId = req.param('campaign');
@@ -30,7 +30,7 @@ module.exports = {
               campaign.impressions = 1;
             campaign.save();
           });
-          return res.ok();
+          res.redirect('/images/1.png');
         });
       }
     });

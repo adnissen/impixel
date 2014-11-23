@@ -71,6 +71,9 @@ module.exports = {
       if (err) console.log(err);
       return res.redirect('/advertiser/' + created.advertiser + '/' + created.id);
     });
+  },
+  redirectToDashboard: function(req, res){
+    return res.redirect('/advertiser/' + req.param('advertiser') + '/dashboard');
   }
 };
 
