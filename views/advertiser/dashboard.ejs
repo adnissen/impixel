@@ -2,13 +2,11 @@
 <tr>
 <th>id</th>
 <th>Campaign</th>
-<th>Impressions</th>
 </tr>
 <% _.each(campaigns, function (campaign) { %>
     <tr>
     <td><%= campaign.id %>
     <td><a href='<%= "/advertiser/" + campaign.advertiser + "/" + campaign.id %>'><%= campaign.name %></a></td>
-    <td><%= campaign.impressions %></td>
     </tr>
     <% }) %>
 </table>
