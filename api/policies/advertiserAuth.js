@@ -7,20 +7,24 @@
  * @docs        :: http://sailsjs.org/#!documentation/policies
  *
  */
+
+var bcrypt = require('bcrypt');
+
 module.exports = function(req, res, next) {
 
   // User is allowed, proceed to the next policy, 
   // or if this is the last policy, the controller
   if (req.session.advertiserToken) {
     Advertiser.findOne(req.param('advertiser')).exec(function findOneCB(e, advertiser){
-      if (advertiser.password == req.session.advertiserToken){
-        return next();
-      }
-      else{
-        // User is not allowed
-        // (default res.forbidden() behavior can be overridden in `config/403.js`)
-        return res.redirect('/advertiser/' + req.param('advertiser') + '/login');
-      }
+      bcrypt.compare(req.session.advertiserToken, advertiser.password, function(err, hash){
+        if (hash == true)
+          return next();
+        else{
+          // User is not allowed
+          // (default res.forbidden() behavior can be overridden in `config/403.js`)
+          return res.redirect('/advertiser/' + req.param('advertiser') + '/login');
+        }
+      });
     });
   }
   else
