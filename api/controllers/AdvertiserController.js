@@ -42,6 +42,7 @@ module.exports = {
         Campaign.calculateImpressions(campaignId, function(e, data){
           return res.view('advertiser/campaign', {
             id: campaign.id,
+            advertiserId: advertiserId,
             name: campaign.name,
             impressions: data.impressions,
             uniqueCountRandom: data.uniqueCountRandom,
