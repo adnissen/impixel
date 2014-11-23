@@ -5,22 +5,28 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var bcrypt = require('bcrypt');
+
 module.exports = {
   login: function(req, res){
     Advertiser.findOne(req.param('advertiser')).exec(function findOneCB(e, advertiser){
       if (!advertiser){
         return res.forbidden();
       }
-      if (req.param('password') == advertiser.password){
-        req.session.advertiserToken = req.param('password');
-        req.session.advertiserId = req.param('advertiser');
-        return res.redirect('/advertiser/' + req.param('advertiser') + '/dashboard');
-      }
-      else{
-        return res.view('advertiser/login', {
-          advertiserId: req.param('advertiser')
-        });
-      }
+      bcrypt.compare(req.param('password'), advertiser.password, function(err, hash){
+        if (err) console.log(err);
+        var password = hash;
+        if (hash == true){
+          req.session.advertiserToken = req.param('password');
+          req.session.advertiserId = req.param('advertiser');
+          return res.redirect('/advertiser/' + req.param('advertiser') + '/dashboard');
+        }
+        else{
+          return res.view('advertiser/login', {
+            advertiserId: req.param('advertiser')
+          });
+        }
+      });
     });
   },
   showCampaign: function(req, res){

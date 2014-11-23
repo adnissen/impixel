@@ -22,15 +22,15 @@ module.exports = {
     campaigns:{
       type: 'array'
     },
-    beforeCreate: function(values, next){
-      bcrypt.hash(values.password, 10, function(err, hash){
-        if (err) return next(err);
-        values.password = hash;
-        next();
-      });
-    }
+    
   },
-
+  beforeCreate: function(values, next){
+    bcrypt.hash(values.password, 10, function(err, hash){
+      if (err) return next(err);
+      values.password = hash;
+      next();
+    });
+  },
   getActiveCampaigns: function(advertiserId, cb){
     Campaign.find({advertiser: advertiserId}).exec(function findCB(e, found){
       var campaigns = [];
